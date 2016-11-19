@@ -1,3 +1,39 @@
 <template>
-  <h1>${message}</h1>
+  <require from="bootstrap/css/bootstrap.css"></require>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Presenter</div>
+          <div class="panel-body">
+            <div style="border: 1px solid black;width: 300px;height: 300px">
+              left
+            </div>
+            <br>
+            <button class="btn btn-default" type="submit">Show video</button>
+            <button class="btn btn-default" type="submit">Hide video</button>
+            <button class="btn btn-default" type="submit">Mute</button>
+            <button class="btn btn-default" type="submit">Un-mute</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Viewer</div>
+          <div class="panel-body">
+            <div style="border: 1px solid black;width: 300px;height: 300px">
+              right
+            </div>
+            <br>
+            <button class="btn btn-default" type="submit">Show video</button>
+            <button class="btn btn-default" type="submit">Hide video</button>
+            <button class="btn btn-default" type="submit">Mute</button>
+            <button class="btn btn-default" type="submit">Un-mute</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
