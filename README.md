@@ -18,3 +18,11 @@ Tools:
 **How to test frontend**
 
 `au test`
+
+**How to run Janus server**
+
+- install Docker
+- run
+
+`cd docker`
+`sudo make run` - it will start Janus image with name 'janus'
