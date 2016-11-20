@@ -25,4 +25,5 @@ Tools:
 - run
 
 `cd docker`
+
 `sudo make run` - it will start Janus image with name 'janus'
