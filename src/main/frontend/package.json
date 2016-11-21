@@ -52,5 +52,16 @@
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-babel-preprocessor": "^6.0.1"
+  },
+  "scripts": {
+    "test": "au test",
+    "clean-frontend": "rm -f scripts/*.*",
+    "clean-boot-frontend": "rm -f ../resources/static/*.*",
+    "prepare-files": "au build --env prod",
+    "copy-js": "mkdir -p ../resources/static/scripts && cp scripts/*.* ../resources/static/scripts",
+    "copy-html": "cp index.html ../resources/static/",
+    "clean-all": "npm run clean-frontend && npm run clean-boot-frontend",
+    "copy-all": "npm run copy-js && npm run copy-html",
+    "build-prod": "npm run clean-all && npm run prepare-files && npm run copy-all"
   }
 }
