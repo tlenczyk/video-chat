@@ -2,18 +2,14 @@
   "name": "frontend",
   "description": "An Aurelia client application.",
   "version": "0.1.0",
-  "repository": {
-    "type": "???",
-    "url": "???"
-  },
   "license": "MIT",
   "dependencies": {
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-animator-css": "^1.0.0",
+    "aurelia-fetch-client": "^1.0.1",
     "bluebird": "^3.4.1",
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest",
-    "jquery": "3.1.1",
     "bootstrap": "3.3.7"
   },
   "peerDependencies": {},
@@ -51,7 +47,8 @@
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-    "karma-babel-preprocessor": "^6.0.1"
+    "karma-babel-preprocessor": "^6.0.1",
+    "jquery": "3.1.1"
   },
   "scripts": {
     "test": "au test",
