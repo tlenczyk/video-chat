@@ -1,6 +1,11 @@
-import environment from './environment';
+import environment from 'config/environment';
 
-//Configure Bluebird Promises.
+import {LogManager} from "aurelia-framework";
+import {ConsoleAppender} from "aurelia-logging-console";
+
+LogManager.addAppender(new ConsoleAppender());
+LogManager.setLevel(LogManager.logLevel.debug);
+
 Promise.config({
   longStackTraces: environment.debug,
   warnings: {
