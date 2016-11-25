@@ -1,10 +1,10 @@
 import {inject} from 'aurelia-framework';
-import {AureliaFetchClient} from 'aurelia-fetch-client';
+import {HttpClient} from 'aurelia-fetch-client';
 
-@inject(AureliaFetchClient)
+@inject(HttpClient)
 export class FetchClient {
 
-  constructor(httpClient){
+  constructor(httpClient) {
     this.httpClient = httpClient;
   }
 

@@ -1,4 +1,4 @@
-import environment from 'config/environment';
+import environment from './environment';
 
 import {LogManager} from "aurelia-framework";
 import {ConsoleAppender} from "aurelia-logging-console";
@@ -17,10 +17,6 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature('resources');
-
-  if (environment.debug) {
-    aurelia.use.developmentLogging();
-  }
 
   if (environment.testing) {
     aurelia.use.plugin('aurelia-testing');
