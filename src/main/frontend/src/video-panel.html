@@ -1,0 +1,16 @@
+<template>
+  <div class="panel panel-default">
+    <div class="panel-heading">${panelTitle}</div>
+    <div class="panel-body">
+      <div class="video-box">
+        <video if.bind="videoOn"></video>
+        <div if.bind="videoOn">No stream</div>
+      </div>
+      <br>
+      <button class="btn btn-default" type="submit" if.bind="!videoOn" click.delegate="toggleVideo()">Show video</button>
+      <button class="btn btn-default" type="submit" if.bind="videoOn" click.delegate="toggleVideo()">Hide video</button>
+      <button class="btn btn-default" type="submit" if.bind="!audioOn" click.delegate="toggleAudio()">Mute</button>
+      <button class="btn btn-default" type="submit" if.bind="audioOn" click.delegate="toggleAudio()">Un-mute</button>
+    </div>
+  </div>
+</template>
