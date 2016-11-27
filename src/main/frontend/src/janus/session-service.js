@@ -10,6 +10,7 @@ export class SessionService {
 
   static getTransactionId = () => (Math.random() * 10000000).toFixed().toString();
   session = null;
+  handles = [];
 
   constructor(fetchClient, eventAggregator, log) {
     this.fetchClient = fetchClient;
@@ -18,13 +19,12 @@ export class SessionService {
   }
 
   createSession(options) {
-    this.options = options;
 
-    return this.fetchClient.post(this.options.server, {
+    return this.fetchClient.post(options.server, {
       janus: "create",
       transaction: SessionService.getTransactionId()
     }).then((json) => {
-      this.session = new Session(json.data.id);
+      this.session = new Session(json.data.id, options, this.fetchClient);
 
       this.log.debug("Session created", this.session);
 

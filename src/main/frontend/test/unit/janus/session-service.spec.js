@@ -2,7 +2,7 @@ import {SessionService} from '../../../src/janus/session-service';
 import {log} from '../../../src/config/logger';
 import {SESSION_CREATED} from '../../../src/commons/constants-events';
 
-describe('fetch-client.spec.js', () => {
+describe('session-service.spec.js', () => {
 
   let sessionService;
   let postDeferred;
@@ -14,13 +14,14 @@ describe('fetch-client.spec.js', () => {
     publish: () => {
     }
   };
+  let transactionId = 1;
 
   beforeEach(() => {
     postDeferred = $.Deferred();
 
     spyOn(fetchClientMock, 'post').and.returnValue(postDeferred.promise());
     spyOn(eventAggregatorMock, 'publish');
-    spyOn(SessionService, 'getTransactionId').and.returnValue(1);
+    spyOn(SessionService, 'getTransactionId').and.returnValue(transactionId);
     sessionService = new SessionService(fetchClientMock, eventAggregatorMock, log);
   });
 
@@ -34,7 +35,7 @@ describe('fetch-client.spec.js', () => {
       //then
       expect(fetchClientMock.post).toHaveBeenCalledWith(options.server, {
         janus: 'create',
-        transaction: 1
+        transaction: transactionId
       });
       expect(sessionService.session.id).toEqual(sessionData.id);
     });
