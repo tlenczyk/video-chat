@@ -1,22 +1,24 @@
 import {SessionService} from '../../../src/janus/session-service';
 import {Session} from '../../../src/janus/session';
+import {VIDEO_PLUGIN_NAME} from '../../../src/commons/constants';
+const noop = () => {
+};
 
 describe('session.spec.js', () => {
 
   let session;
-  let postDeferred;
+  let postPromiseResolve;
   let fetchClientMock = {
-    post: () => {
-    }
+    post: noop
   };
   let sessionId = 1;
   let transactionId = 2;
   let options = {server: 'http://any-janus-url'};
 
   beforeEach(() => {
-    postDeferred = $.Deferred();
-
-    spyOn(fetchClientMock, 'post').and.returnValue(postDeferred.promise());
+    spyOn(fetchClientMock, 'post').and.returnValue(new Promise((resolve)=> {
+      postPromiseResolve = resolve;
+    }));
     spyOn(SessionService, 'getTransactionId').and.returnValue(transactionId);
     session = new Session(sessionId, options, fetchClientMock);
   });
@@ -26,24 +28,31 @@ describe('session.spec.js', () => {
   });
 
 
-  it('should attach to video plugin', () => {
+  it('should attach to video plugin', (done) => {
     //given
     let pluginHandle = {
       data: {id: 1}
     };
 
     //when
-    session.attach(options).then((handle)=> {
-      //then
-      expect(fetchClientMock.post).toHaveBeenCalledWith(url(), {
-        janus: 'attach',
-        transaction: transactionId
-      });
-      expect(session.handles).toEqual({
-        [pluginHandle.data.id]: handle
-      });
+    let attachPromise = session.attach(options);
+
+    //then
+    expect(fetchClientMock.post).toHaveBeenCalledWith(url(), {
+      janus: 'attach',
+      plugin: VIDEO_PLUGIN_NAME,
+      transaction: transactionId
     });
-    postDeferred.resolve(pluginHandle);
+
+    //when
+    postPromiseResolve(pluginHandle);
+
+    //then
+    attachPromise.then((handle)=> {
+      //then
+      expect(session.handles).toEqual({[pluginHandle.data.id]: handle});
+      done();
+    });
   });
 
   function url() {
