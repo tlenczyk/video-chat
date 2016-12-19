@@ -8,8 +8,10 @@ describe('session.spec.js', () => {
 
   let session;
   let postPromiseResolve;
+  let getPromiseResolve;
   let fetchClientMock = {
-    post: noop
+    post: noop,
+    get: noop
   };
   let sessionId = 1;
   let transactionId = 2;
@@ -18,6 +20,9 @@ describe('session.spec.js', () => {
   beforeEach(() => {
     spyOn(fetchClientMock, 'post').and.returnValue(new Promise((resolve)=> {
       postPromiseResolve = resolve;
+    }));
+    spyOn(fetchClientMock, 'get').and.returnValue(new Promise((resolve)=> {
+      getPromiseResolve = resolve;
     }));
     spyOn(SessionService, 'getTransactionId').and.returnValue(transactionId);
     session = new Session(sessionId, options, fetchClientMock);
@@ -35,7 +40,7 @@ describe('session.spec.js', () => {
     };
 
     //when
-    let attachPromise = session.attach(options);
+    let attachPromise = session.attach();
 
     //then
     expect(fetchClientMock.post).toHaveBeenCalledWith(url(), {

@@ -12,7 +12,8 @@ export class App {
 
   attached() {
     const server = "http://172.17.0.2:8088/janus";
+    const iceServers = [{urls: "stun:stun.l.google.com:19302"}];
 
-    this.sessionService.createSession({server});
+    this.sessionService.createSession({server, iceServers});
   }
 }

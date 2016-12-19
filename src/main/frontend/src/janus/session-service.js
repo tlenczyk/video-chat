@@ -31,4 +31,17 @@ export class SessionService {
       this.eventAggregator.publish(SESSION_CREATED, this.session);
     });
   }
+
+  destroySession() {
+    for (var ph in this.handles) {
+      this.handles[ph].destroy();
+    }
+
+    return this.fetchClient.post(this.url(), {
+      janus: "destroy",
+      transaction: SessionService.getTransactionId()
+    }).then(res =>{
+      log.debug('Session destroyed', res);
+    });
+  }
 }

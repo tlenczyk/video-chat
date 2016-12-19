@@ -1,16 +1,17 @@
 <template>
   <require from="bootstrap/css/bootstrap.css"></require>
   <require from="./styles/main.css"></require>
-  <require from="./video-panel"></require>
+  <require from="./local-video-panel"></require>
+  <require from="./remote-video-panel"></require>
 
   <div class="container">
 
     <div class="row">
-      <div class="col-md-6">
-        <video-panel panel-title="Local Video"></video-panel>
+      <div class="col-md-5">
+        <local-video-panel panel-title="Local Video"></local-video-panel>
       </div>
-      <div class="col-md-6">
-        <video-panel panel-title="Remote Video"></video-panel>
+      <div class="col-md-7">
+        <remote-video-panel panel-title="Remote Video"></remote-video-panel>
       </div>
     </div>
   </div>
